@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "name": "ALOCAM | Servicios Alimenticios Corporativos",
+  "short_name": "ALOCAM",
+  "description": "Operación, trazabilidad y gestión de servicios alimenticios corporativos ALOCAM.",
+  "lang": "es-MX",
+  "dir": "ltr",
+  "start_url": "./?pwa=launch",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone"],
+  "orientation": "portrait-primary",
+  "background_color": "#030918",
+  "theme_color": "#030918",
+  "prefer_related_applications": false,
+  "categories": ["business", "productivity"],
+  "version": "2.1.0",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
