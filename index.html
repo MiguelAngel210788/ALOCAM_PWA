@@ -242,9 +242,15 @@
       }
 
       function readBackendUrl(config) {
-        const queryValue = new URLSearchParams(window.location.search || '').get('backend')
-          || new URLSearchParams(window.location.search || '').get('alocam_backend');
-        const candidates = [queryValue, config.gasWebAppUrl, safeStorageGet(STORAGE_KEY)];
+        const params = new URLSearchParams(window.location.search || '');
+        const queryValue = normalizeBackendUrl(params.get('backend') || params.get('alocam_backend'));
+        if (queryValue) {
+          // El botón «Instalar aplicativo» de ALOCAM abre esta carcasa con la dirección de la Web App: se guarda
+          // en este dispositivo para que la app instalada la use sin volver a pedirla.
+          safeStorageSet(STORAGE_KEY, queryValue);
+          return queryValue;
+        }
+        const candidates = [config.gasWebAppUrl, safeStorageGet(STORAGE_KEY)];
         for (const candidate of candidates) {
           const normalized = normalizeBackendUrl(candidate);
           if (normalized) return normalized;
@@ -329,6 +335,10 @@
 
       function safeStorageGet(key) {
         try { return window.localStorage.getItem(key) || ''; } catch (error) { return ''; }
+      }
+
+      function safeStorageSet(key, value) {
+        try { window.localStorage.setItem(key, value); } catch (error) { /* almacenamiento opcional */ }
       }
 
       function isStandalone() {
